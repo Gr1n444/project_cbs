@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cybersecurity School{% endblock title %}</title>
+    <link rel="icon" href="{% static "img/favicon.ico" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    {% block style %}{% endblock style %}
+</head>
+<body>
+    {% block header %}
+    {% if user.is_authenticated %}
+    <header class="header">
+        <a href="{% url 'landing' %}" class="logo">CyberSecurity <span>School</span></a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            {% comment %} <a href="/events">Event</a> {% endcomment %}
+            <a href="{% url 'articles' %}">Статьи</a>
+            <a href="/tests">Тесты</a>
+            <a href="/tasks">Задания</a>
+            <a href="/leaderboard">Рейтинг</a>
+            <a href="/account">Мой профиль</a>
+            <a href="/logoutUser">Выйти</a>
+        </nav>
+    </header>
+    {% else %}
+    <header class="header">
+        <a href="{% url 'landing' %}" class="logo">CyberSecurity <span>School</span></a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="{% url 'articles' %}">Статьи</a>
+            <a href="{% url 'leaderboardUsers' %}">Рейтинг</a>
+            <a href="{% url 'login' %}">Вход</a>
+        </nav>
+    </header>
+    {% endif %}
+    {% endblock header %}
+    {% block content %}{% endblock %}
+    {% block footer %}
+    <footer class="footer">
+        
+        <ul class="list">
+            <li>
+                <a href="https://new.college.asu.ru/pk/obespechenie-informacionnoj-bezopasnosti-avtomatizirovannyh-sistem/">Колледж</a>
+            </li>
+            <li>
+                <a href="https://phys.asu.ru/%D0%B0%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0%D0%BC/%D0%B1%D0%B0%D0%BA%D0%B0%D0%BB%D0%B0%D0%B2%D1%80%D0%B8%D0%B0%D1%82/%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81/%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0-%D1%81%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D1%81%D1%82%D0%BE%D0%B2-%D0%B2-%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%B8-%D0%B8%D0%BD/">Бакалавриат</a>
+            </li>
+            <li>
+                <a href="https://phys.asu.ru/%D0%B0%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0%D0%BC/%D0%BC%D0%B0%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B0/%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B1%D0%B0%D0%BD%D0%BA%D0%BE%D0%B2%D1%81/">Магистратура</a>
+            </li>
+            <li>
+                <a href="https://www.asu.ru/education/aspir_admiss/">Аспирантура</a>
+            </li>
+            <li>
+                <a href="https://phys.asu.ru/%D1%83%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B9-%D1%86%D0%B5%D0%BD%D1%82%D1%80-%D0%B4%D0%BF%D0%BE-%D0%B8%D1%86%D1%82%D1%8D%D1%84/">ДПО</a>
+            </li>
+        </ul>
+        <p class="copyright">© CyberSecurity School | All Rights Reserved | Created by <a href="https://vk.com/d.fedoseenko" style='color:white;'>Danil Fedoseenko</a></p>
+    </footer>
+    {% endblock footer%}
+    <script src="{% static "js/script-landing.js" %}"></script>
+</body>
+</html>

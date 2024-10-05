@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Тесты{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>
+<div class="test-container">
+    <h2 class="test-heading">Тесты</h2>
+    <div class="card-container">
+        {% for test in tests %}
+        <div class="card">
+            <div class="card-content">
+                <h3>{{ test.name }}</h3>
+                <p>{{ test.test_description }}</p>
+                <a href="{% url 'app_test:display_test' test.id %}" class="card-content-button">Пройти тест</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>    
+{% endblock  %}

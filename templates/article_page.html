@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{{ article.title }}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/articles.css' %}">
+{% endblock style %}
+{% block content %}
+<style>
+    a{
+        text-decoration: none;
+    }
+    body{
+        color:#333;
+        font-family:"Poppins",Arial,Helvetica,sans-serif;
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+        color: var(--text-color);
+        margin-bottom:60px;
+        line-height:1.4rem;
+        font-size: 18px;
+        margin: 5px;
+        line-height: 1.5em;
+    }
+</style>
+        <div class="article-text">{{ article.full_text | safe }}</div>
+{% endblock %}

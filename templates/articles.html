@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Статьи{% endblock title %} 
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>
+<h2 class="articles-heading">Почитайте статьи</h2>
+        <div class="articles-container">
+            {% for article in articles %}
+            <a class="article-box" href="{{ article.get_absolute_url }}">
+                <img src="{{ article.title_image.url }}" alt="Article Image" class="article-img">
+                <div class="article-info">
+                    <h4>{{ article.title }}</h4>
+                    <p>{{article.summary}}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+{% endblock %}

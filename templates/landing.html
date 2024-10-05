@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Home - CyberSecurity School{% endblock title %}
+
+{% block content %}
+<section class="home" id="home">
+    <div class="home-content">
+        <h1>Добро пожаловать</h1>
+        <h3 class="text-animation"><span></span></h3>
+        <p>Проект Института цифровых технологий, электроники и физики АлтГУ в рамках федеральной программы “ПРИОРИТЕТ-2030”. Наша цель — повышение твоей осведомлённости в области защиты данных.</p>
+        {% if user.is_authenticated %}
+        <div class="landing-btn-group"></div>
+        {% else %}
+        <div class="landing-btn-group">
+            <a href="{% url 'login' %}" class="landing-btn">Вход</a>
+            <a href="{% url 'register' %}" class="landing-btn">Регистрация</a>
+        </div>
+        {% endif %}
+    </div>
+        <div class="home-image">
+            <a href="https://phys.asu.ru/"><img src="{% static "img/ictef.jpg" %}" alt="ICTEF"></a>
+        </div>
+</section>
+
+<section class="education" id="education">
+    <h2 class="landing-heading">Как пользоваться сервисом?</h2>
+    <div class="timeline-items">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Шаг 1</div>
+            <div class="timeline-content">
+                <h3>Регистрация</h3>
+                <p>Пройди простую регистрацию, что получить полный доступ к обучающим материалам.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Шаг 2</div>
+            <div class="timeline-content">
+                <h3>Обучение</h3>
+                <p>Читай обучающие статьи, которые посвящены актуальным тематикам информационной безопасности</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Шаг 3</div>
+            <div class="timeline-content">
+                <h3>Практика</h3>
+                <p>Проверь свои знания, решая интересные задания по информационной безопасности</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Шаг 4</div>
+            <div class="timeline-content">
+                <h3>Рейтинги</h3>
+                <p>Соревнуйся с другими пользователями, чтобы выявить сильнейшего специалиста. Ты можешь следить за своими успехами в рейтинговой таблице</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <h2 class="landing-heading">Ознакомьтесь с материалами</h2>
+<style>
+    .service-info h4{
+        line-height: 1.2;
+    }
+</style>
+    <div class="services-container">
+        <a href="https://www.kaspersky.ru/resource-center/preemptive-safety/kids-guidelines" class="service-box">
+            <div class="service-info">
+                <h4>Основы информационной безопасности</h4>
+                <p>Статья с официального сайта Касперского, в которой рассмотрены основные аспекты безопасности в Интернете, а также предоставлены рекомендации для детей и подростков</p>
+            </div>
+        </a>
+
+        <a href="https://privacy.kaspersky.com/ru/?utm_source=vk&utm_medium=social&utm_campaign=ru_privacy-checker_mk0131&utm_content=sm-post&utm_term=ru_vk_organic_wm1312assprgvpt" class="service-box">
+            <div class="service-info">
+                <h4>Как чувствовать себя безопасно в социальных сетях?</h4>
+                <p>Создать надёжный пароль, подключить двухфакторную аутентификацию и... Подкрутить настройки приватности уже внутри самой социальной сети. Как это сделать? Переходите и узнаете!</p>
+            </div>
+        </a>
+
+        <a href="https://habr.com/ru/articles/846684/" class="service-box">
+            <div class="service-info">
+                <h4>Кому жаловаться на вредоносный ресурс?</h4>
+                <p>В статье разъясняется, куда можно пожаловаться, если вы столкнулись с фишингом или другими вредоносными сайтами. Эта информация не поможет полностью удалить такие сайты, но покажет, куда можно обратиться, чтобы их заблокировали.</p>
+            </div>
+        </a>
+
+        <a href="https://www.anti-malware.ru/analytics/Technology_Analysis/Security-Awareness-2024" class="service-box">
+            <div class="service-info">
+                <h4>Каким навыкам практической ИБ (Security Awareness) нужно обучать сотрудников?</h4>
+                <p>Важно понимать, каким практическим навыкам в области борьбы с угрозами следует обучать персонал и как организовать этот процесс, чтобы он был наиболее эффективным.</p>
+            </div>
+        </a>
+    </div>
+</section>
+<section class="testimonials" id="testimonials">
+    <div class="testimonials-box">
+        <h2 class="landing-heading">Рекомендуем</h2>
+
+        <div class="wrapper">
+            <a href="https://habr.com/ru/hubs/infosecurity/articles/" class="testimonials-item">
+                <img src="{% static "img/habr.jpg" %}" alt="">
+                <h2>Хабр</h2>
+                <div class="rating">
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p>"Раздел «Информационная безопасность» известного совместного блога об ИТ"</p>
+            </a>
+
+            <a href="https://www.securitylab.ru/" class="testimonials-item">
+                <img src="{% static "img/securitylab.jpg" %}" alt="">
+                <h2>Security Lab</h2>
+                <div class="rating">
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p>"Информационный портал, ежедневно рассказывающий о событиях в области защиты информации, интернет права и новых технологиях"</p>
+            </a>
+
+            <a href="https://xakep.ru/" class="testimonials-item">
+                <img src="{% static "img/xaker.jpeg" %}" alt="">
+                <h2>Xakep</h2>
+                <div class="rating">
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                    <i class='bx bxs-star' id="star"></i>
+                </div>
+                <p>"Статьи про безопасность, разработку и администрирование компьютерных сетей"</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <h2 class="landing-heading">Свяжитесь <span>с нами</span></h2>
+    <form action="{% url 'landing' %}" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+            <div class="input-box">
+                {{ form.name }}
+                {{ form.email }}
+            </div>
+            <div class="input-box">
+                {{ form.subject }}
+                {{ form.captcha }}
+            </div>
+        </div>
+        <div class="input-group-2">
+            {{ form.body }}
+            <input type="submit" value="Отправить" class="landing-btn">
+        </div>
+    </form>
+    <div class="popup" id="popup">
+        <div id="popup-messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="closePopup()">Закрыть</button>
+    </div>
+</section>
+<script>
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+        popup.classList.add("open-popup");
+    }
+
+    function closePopup() {
+        popup.classList.remove("open-popup");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        {% if messages %}
+            openPopup();
+        {% endif %}
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Результаты теста{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>
+<div class="container-results">
+    <div class="results-container">
+        <h2>Тест {{ test }} завершен</h2>
+        <table>
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Всего вопросов</td>
+            <td>{{ number }}</td>
+            </tr>
+            <tr>
+            <td>Правильных ответов</td>
+            <td>{{ correct }}</td>
+            </tr>
+            <tr>
+            <td>Неправильных ответов</td>
+            <td>{{ wrong }}</td>
+            </tr>
+            <tr>
+            <td>Пропущено вопросов</td>
+            <td>{{ skipped }}</td>
+            </tr>
+        </tbody>
+        </table>
+        <a href={% url 'app_test:tests'%} class="return_test_button">Вернуться к тестам</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock footer %}

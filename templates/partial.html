@@ -1,0 +1,20 @@
+{% if error_message %}
+    <span>{{ error_message }}</span>
+{% elif is_correct %}
+    <span>Правильно.</span>
+    <span>{{ question.explanation }}</span>
+{% elif is_correct == None %}
+    <span>Не выбран вариант ответа. Не забудьте ответить позже!</span>
+{% else %}
+    {% if correct_answer|length > 1 %}
+        <div>
+            Частично верно! Правильные ответы:
+            <ul>
+                {% for answer in correct_answer %}<li>{{ answer }}</li>{% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <span>Неверно! Правильный ответ: {{ correct_answer }}</span>
+    {% endif %}
+    <span>{{ question.explanation }}</span>
+{% endif %}

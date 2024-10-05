@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Рейтинговая таблица{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>  
+    <div class="test-container">
+        <h1 class="rating-heading">Рейтинги соревнования</h1>
+            <div class="rating-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Sr:No</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td scope="row" data-label="Sr:No">{{ forloop.counter }}</td>
+                        <td data-label="Username"><a href="{% url 'user-profile' user.username %}">{{ user.username }}</a></td>
+                        <td data-label="Points">{{ user.event_points }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}
+
+{% block footer %}{% endblock footer %}

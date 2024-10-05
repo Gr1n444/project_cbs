@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Соревнование{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+    .container-btn{
+        text-align: center;
+        margin-top: -5rem;
+        margin-bottom: 5rem;
+    }
+</style>
+<h2 class="tasks-heading">Capture the Flag!</h2>
+<div class="container-btn">
+    <a href="/leaderboard_event" class="tasks-rating">Рейтинговая таблица</a>
+</div>
+<div class="tasks-container">
+    {% for task in tasks %}
+    <div class="tasks-box">
+        <img src="{{ task.title_image.url }}" alt="task Image" class="tasks-img">
+        <div class="tasks-info">
+            <h4>{{ task.task_title }}</h4>
+            <h5>Сложность: {{ task.difficulty}}</h5>
+            <h5>Тип задания: {{ task.type_task }}</h5>
+            <p>{{ task.task_description }}</p>
+        </div>
+        <div class="tasks-details">
+            <div class="tasks-points">{{ task.points }} points</div>
+            <a href="{% url 'view_ctfEvent' task.id %}" class="tasks-btn">Перейти</a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock  %}

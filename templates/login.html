@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Авторизация{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>
+<div class="wrappper">   
+    <div class="form-box">
+        <div class="login-container">
+            <div class="top">
+                <div class="title">Вход в аккаунт</div>
+            </div>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+            <div class="input-box">
+                {{ form.username }}
+                <i class="bx bx-user"></i>
+            </div>
+            <div class="input-box">
+                {{ form.password }}
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-box">
+                
+                {{ form.captcha }}
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Войти">
+            </div>
+            <div class="two-col">
+                <div class="two">
+                    <label> <a href="{% url 'register' %}">Регистрация</a></label>
+                </div>
+                <div class="two">
+                    <label><a href="{% url 'password_reset' %}">Забыли пароль?</a></label>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div id="popup-messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="closePopup()">Закрыть</button>
+    </div>
+</div> 
+
+<script>
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+        popup.classList.add("open-popup");
+    }
+
+    function closePopup() {
+        popup.classList.remove("open-popup");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        {% if messages %}
+            openPopup();
+        {% endif %}
+    });
+</script>
+
+{% endblock %}
+
+{% block footer %}{% endblock footer %}

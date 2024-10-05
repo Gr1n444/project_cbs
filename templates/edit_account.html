@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Редактирование профиля{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>
+<div class="profile-container">
+    <div class="profile">
+        <div class="profile-header">
+        </div>
+
+        <div class="profile-menu">
+            <a href="{% url 'account' %}" class="profile-menu-link"><i class="fa-solid fa-circle-user profile-menu-icon"></i>Мой профиль</a>
+            <a href="{% url 'edit-account' %}" class="profile-menu-link profile-menu-link-active"><i class="fa-solid fa-gear profile-menu-icon"></i>Редактировать профиль</a>
+            <a href="{% url 'logoutUser' %}" class="profile-menu-link"><i class="fa-solid fa-bracket profile-menu-icon"></i>Выйти из аккаунта</a>
+        </div>
+    </div>
+
+    <form method="POST" action="{% url 'edit-account' %}" class="account" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="account-header">
+            <h1 class="account-title">Редактирование <span>профиля</span></h1>
+            <div class="button-profile-container">  
+                <button type="submit" class="button-profile-save">Сохранить изменения</button>
+            </div>
+        </div>
+        
+        {% for field in form %}
+        <div class="account-edit">
+            <div class="input-container">
+                <label for={{ field.name }}>{{ field.label }}</label>
+                {{ field }}
+            </div>
+        </div>
+        {% endfor %}
+        {% for error in field.errors %}<p>{{ error }}</p>
+        {% endfor %}
+        
+    </form>
+</div>
+{% endblock  %}
+

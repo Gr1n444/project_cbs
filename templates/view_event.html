@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Задание{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock style %}
+{% block content %}
+<style>
+    body{
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+    .main-container{
+        height: 71vh;
+        margin-top: 15rem;
+        margin-bottom: 5rem;
+    }
+    .task-materials a{
+        font-size: 2rem;
+        color: var(--main-color);
+    }
+
+    @media(max-width:991px){
+        .footer{
+            margin-top: 100px;
+        }
+    }
+</style>
+<div class="main-container">
+    <div class="task-container">
+        <a href="{% url 'ctfEvents' %}" class="return-button"><i class="fas fa-arrow-left"></i> Вернуться назад</a>
+        <div class="task-header">
+            <div>
+                <h1>{{ task.task_title }}</h1>
+                <p>Уровень: <span class="difficulty">{{ task.difficulty }}</span></p>
+            </div>
+            <div class="task-reward">
+                <p>Награда за выполнение: <span>{{ task.points }} очков</span></p>
+                <p>Тип задания: <span>{{ task.type_task }}</span></p>
+            </div>
+        </div>
+        <div class="task-description">
+            <p>{{ task.task_text }}</p>
+            
+        </div>
+        <div class="task-materials">
+            {% if task.material_file %}
+            <p>Materials: <a href="{{ task.material_file.url }}" download>здесь</a></p>
+            {% endif %}
+        </div>
+        <hr>
+        <form action="{% url 'view_ctfTask' task.id %}" method="post">
+            {% csrf_token %}
+            <div class="task-answer">
+            <label for="answer">Ответ</label>
+            <input type="text" id="user_answer" name="user_answer" placeholder="Enter your key" required>
+            </div>
+        <button type="submit" class="submit-button">Отправить</button>
+        </form>
+        {% if already_answered %}
+        <p>Вы уже успешно прошли это задание и получили за него баллы.</p>
+        {% endif %}
+
+        {% if is_correct is not None %}
+        <div class="task-explanation">
+            {% if is_correct %}
+                <p class="correct">Правильно! Вы получили {{ task.points }} очков.</p>
+            {% else %}
+                <p class="incorrect">Неправильно! Попробуйте снова.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

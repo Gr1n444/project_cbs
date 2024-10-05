@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Профиль пользователя{% endblock title %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right bottom, var(--bg-color), var(--main-color));
+    }
+</style>
+<div class="profile-container">
+    <div class="profile">
+        <div class="profile-header">
+            <img src="{{ profile.image.url }}" alt="profile" class="profile-img" />
+        </div>
+    </div>
+
+    <div class="account">
+        <div class="account-header">
+            <h1 class="account-title">Профиль <span>пользователя</span></h1>
+        </div>
+        
+        <div class="account-info">
+            <div class="input-container">
+                <label>Имя</label>
+                <p>{{ profile.first_name }}</p>
+            </div>
+            <div class="input-container">
+                <label>Фамилия</label>
+                <p>{{ profile.last_name }}</p>
+            </div>
+        </div>
+
+        <div class="account-info">
+            <div class="input-container">
+                <label>Email</label>
+                <p>{{ profile.email }}</p>
+            </div>
+            <div class="input-container">
+                <label>Город</label>
+                <p>{{ profile.city }}</p>
+            </div>
+        </div>
+
+        <div class="account-info">
+            <div class="input-container">
+                <label>Пара слов о себе</label>
+                <div class="readonly-text">{{ profile.about }}</div>
+            </div>
+        </div>
+        <div class="account-info">
+            <div class="input-container">
+                <label>Баллов</label>
+                <p>{{ profile.points }}</p>
+            </div>
+            <div class="input-container">
+                <label>Уровень</label>
+                <p>{{ profile.level }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

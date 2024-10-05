@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Тест{% endblock title %}
+{% block content %}
+<style>
+    body{
+        height: 100%;
+    }
+    .main-wrap{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center; /* выравнивание по верхнему краю контейнера */
+        height: 100%;
+        margin-top: 8rem; /* отступ сверху */
+        box-sizing: border-box; /* включение отступов в расчёт высоты */
+        margin-bottom: 4rem;
+        height: 75vh;
+    }
+    .form_radio_btn, .form_radio_btn label{
+        max-width: 800px;
+        width: 100%;
+    }
+</style>
+<div class="main-wrap">
+<div class="mainer-container">
+    <div class="question">
+        <h2>Вопрос {{ current_index }} из {{ number }}</h2>
+        <p>{{ question.name }}</p>
+    </div>
+    <form id="question-form" action="{% url 'app_test:grade_question' test.id question.id %}" method="post">
+        {% csrf_token %}
+        {% if question.qtype == 'single' %}
+            <div class="question-exp">
+                <p>Только один ответ здесь - правильный</p>
+            </div>
+            {% for answer in question.answer_set.all %}
+                <div class="answer-options">
+                    <div class="form_radio_btn">
+                        <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}"/>
+                        <label for="answer{{ forloop.counter }}">{{ answer.name | safe }}</label>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="question-exp">
+                <p>Здесь несколько правильных ответов</p>
+            </div>
+            {% for answer in question.answer_set.all %}
+            <div class="form_radio_btn">
+                <input type="checkbox" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}"/>
+                <label for="answer{{ forloop.counter }}">{{ answer.name | safe }}</label>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <button type="submit" class="return_test_button">Ответить</button>
+        </form>
+            <div id="question-feedback" class="question-explanation"></div>
+            <div id="next-question-container" class="next-question">
+                {% if next_question %}
+                    <a class="return_test_button" href="{% url 'app_test:display_question' test.id next_question.id %}">Следующий вопрос</a>
+                {% else %}
+                    <a class="test_button" href="{% url 'app_test:test_results' test.id %}">Посмотреть результаты</a>
+                {% endif %}
+            </div>
+            
+</div>
+</div>
+<script>
+    const form = document.getElementById("question-form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById("question-feedback").innerHTML = text;
+            document.getElementById("next-question-container").style.display = 'block'; // Показать кнопки после ответа
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+{% endblock %}
